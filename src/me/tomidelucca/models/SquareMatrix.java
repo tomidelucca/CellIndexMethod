@@ -5,8 +5,8 @@ import java.util.List;
 
 public class SquareMatrix {
 
-    private List<List<List<Particle>>> matrix;
-    private int size;
+    protected List<List<List<Particle>>> matrix;
+    protected int size;
 
     public SquareMatrix(int size) {
         this.size = size;
@@ -20,6 +20,7 @@ public class SquareMatrix {
     }
 
     public List<Particle> getElement(int x, int y) {
+        if(x>=size || y>=size) return null;
         return matrix.get(x).get(y);
     }
 

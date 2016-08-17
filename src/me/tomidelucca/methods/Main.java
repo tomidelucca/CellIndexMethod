@@ -4,7 +4,9 @@ import me.tomidelucca.models.Particle;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.util.Map;
 import java.util.Scanner;
+import java.util.Set;
 
 public class Main {
 
@@ -49,7 +51,13 @@ public class Main {
             }
         }
 
-        CellIndexMethod.neighbours(particles, L, M, Rc);
+        long startTime = System.currentTimeMillis();
+        System.out.println(CellIndexMethod.neighbours(particles, L, M, Rc, false));
+        System.out.println(System.currentTimeMillis()-startTime);
 
+        startTime = System.currentTimeMillis();
+        System.out.println(BruteForceMethod.neighbours(particles, Rc));
+        System.out.println(System.currentTimeMillis()-startTime);
     }
+
 }

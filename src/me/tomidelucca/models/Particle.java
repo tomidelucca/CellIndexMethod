@@ -31,14 +31,15 @@ public class Particle {
     }
 
     public static double distanceBetweenParticles(Particle p1, Particle p2) {
-        return Point.distanceBetweenPoints(p1.getPosition(), p2.getPosition()) - p1.radius - p2.radius;
+        double distance = Point.distanceBetweenPoints(p1.getPosition(), p2.getPosition()) - p1.radius - p2.radius;
+        return distance>0?distance:0;
     }
 
     @Override
     public String toString() {
-        return "Particle{" +
-                "radius=" + radius +
-                ", position=" + position +
+        return "P {" +
+                "r=" + radius +
+                ", p=" + position +
                 '}';
     }
 

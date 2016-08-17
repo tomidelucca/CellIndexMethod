@@ -31,14 +31,14 @@ public class Point {
     }
 
     public static double distanceBetweenPoints(Point p1, Point p2) {
-        return Math.hypot(p1.getX()-p2.getX(), p1.getX()-p2.getY());
+        return Math.hypot(p1.getX()-p2.getX(), p1.getY()-p2.getY());
     }
 
     @Override
     public String toString() {
-        return "{x=" + x +
-                ", y=" + y +
-                '}';
+        return "(" + x +
+                ", " + y +
+                ')';
     }
 
     @Override
