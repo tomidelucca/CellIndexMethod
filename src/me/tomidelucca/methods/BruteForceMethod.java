@@ -12,9 +12,9 @@ public class BruteForceMethod {
 
         for(int i = 0; i<particles.length; i++) {
             Particle p = particles[i];
-            for(int j = i+1; j<particles.length; j++) {
+            for(int j = 0; j<particles.length; j++) {
                 Particle otherParticle = particles[j];
-                if (p.distanceToParticle(otherParticle) <= Rc) {
+                if (p.distanceToParticle(otherParticle) <= Rc && !p.equals(otherParticle)) {
                     result.get(p).add(otherParticle);
                     result.get(otherParticle).add(p);
                 }

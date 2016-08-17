@@ -22,7 +22,7 @@ public class Main {
         BufferedReader br = null;
 
         try {
-            br = new BufferedReader(new FileReader("resources/input.rawr"));
+            br = new BufferedReader(new FileReader("resources/tomi.rawr"));
             StringBuilder sb = new StringBuilder();
             String line = br.readLine();
 
@@ -51,13 +51,19 @@ public class Main {
             }
         }
 
-        long startTime = System.currentTimeMillis();
-        System.out.println(CellIndexMethod.neighbours(particles, L, M, Rc, false));
-        System.out.println(System.currentTimeMillis()-startTime);
+        long startTime;
 
-        startTime = System.currentTimeMillis();
+        for(int i = 5; i < L/(Rc + 2*0.5); i=i+1){
+            startTime = System.currentTimeMillis();
+            CellIndexMethod.neighbours(particles, L, i, Rc, false);
+            System.out.println("M= " + i + ", Time= " + (System.currentTimeMillis() - startTime));
+        }
+
+        /*startTime = System.currentTimeMillis();
         System.out.println(BruteForceMethod.neighbours(particles, Rc));
-        System.out.println(System.currentTimeMillis()-startTime);
+        System.out.println(System.currentTimeMillis()-startTime);*/
+
+        //InputGenerator.generateRandomInput(1000, 100, 0.5, "tomi.rawr");
     }
 
 }
