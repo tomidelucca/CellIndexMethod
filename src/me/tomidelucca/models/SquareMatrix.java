@@ -20,8 +20,16 @@ public class SquareMatrix {
     }
 
     public List<Particle> getElement(int x, int y) {
-        if(x>=size || y>=size) return null;
+        if(x>=size || y>=size || y<0 || x<0) return null;
         return matrix.get(x).get(y);
+    }
+
+    public int getScaleFactorX(int x) {
+        return 0;
+    }
+
+    public int getScaleFactorY(int y) {
+        return 0;
     }
 
     @Override

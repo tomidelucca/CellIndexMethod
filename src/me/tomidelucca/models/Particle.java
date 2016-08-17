@@ -10,6 +10,12 @@ public class Particle {
         this.radius = radius;
     }
 
+    public Particle(Particle p, double moveFactorX, double moveFactorY) {
+        Point pos = p.getPosition();
+        this.position = new Point(pos.getX()+moveFactorX, pos.getY()+moveFactorY);
+        this.radius = p.getRadius();
+    }
+
     public double getRadius() {
         return radius;
     }

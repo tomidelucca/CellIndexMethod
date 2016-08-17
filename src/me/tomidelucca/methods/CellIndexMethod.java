@@ -22,6 +22,7 @@ public class CellIndexMethod {
             int y = (int)(p.getPosition().getY()/cellSize);
 
             List<Particle> particlesAtPoint = null;
+            Particle tmpParticle = null;
 
             // x y
             particlesAtPoint = matrix.getElement(x,y);
@@ -34,37 +35,49 @@ public class CellIndexMethod {
 
             // x+1 y
             particlesAtPoint = matrix.getElement(x+1,y);
-            for(Particle otherParticle : particlesAtPoint) {
-                if(p.distanceToParticle(otherParticle) <= Rc) {
-                    result.get(p).add(otherParticle);
-                    result.get(otherParticle).add(p);
+            if(particlesAtPoint != null) {
+                for (Particle otherParticle : particlesAtPoint) {
+                    tmpParticle = new Particle(otherParticle, L * matrix.getScaleFactorX(x + 1), L * matrix.getScaleFactorY(y));
+                    if (p.distanceToParticle(tmpParticle) <= Rc) {
+                        result.get(p).add(otherParticle);
+                        result.get(otherParticle).add(p);
+                    }
                 }
             }
 
             // y+1 x
             particlesAtPoint = matrix.getElement(x,y+1);
-            for(Particle otherParticle : particlesAtPoint) {
-                if(p.distanceToParticle(otherParticle) <= Rc) {
-                    result.get(p).add(otherParticle);
-                    result.get(otherParticle).add(p);
+            if(particlesAtPoint != null) {
+                for (Particle otherParticle : particlesAtPoint) {
+                    tmpParticle = new Particle(otherParticle, L * matrix.getScaleFactorX(x), L * matrix.getScaleFactorY(y + 1));
+                    if (p.distanceToParticle(tmpParticle) <= Rc) {
+                        result.get(p).add(otherParticle);
+                        result.get(otherParticle).add(p);
+                    }
                 }
             }
 
             // x+1 y+1
             particlesAtPoint = matrix.getElement(x+1,y+1);
-            for(Particle otherParticle : particlesAtPoint) {
-                if(p.distanceToParticle(otherParticle) <= Rc) {
-                    result.get(p).add(otherParticle);
-                    result.get(otherParticle).add(p);
+            if(particlesAtPoint != null) {
+                for (Particle otherParticle : particlesAtPoint) {
+                    tmpParticle = new Particle(otherParticle, L * matrix.getScaleFactorX(x + 1), L * matrix.getScaleFactorY(y + 1));
+                    if (p.distanceToParticle(tmpParticle) <= Rc) {
+                        result.get(p).add(otherParticle);
+                        result.get(otherParticle).add(p);
+                    }
                 }
             }
 
             // x+1 y-1
             particlesAtPoint = matrix.getElement(x+1,y-1);
-            for(Particle otherParticle : particlesAtPoint) {
-                if(p.distanceToParticle(otherParticle) <= Rc) {
-                    result.get(p).add(otherParticle);
-                    result.get(otherParticle).add(p);
+            if(particlesAtPoint != null) {
+                for (Particle otherParticle : particlesAtPoint) {
+                    tmpParticle = new Particle(otherParticle, L * matrix.getScaleFactorX(x + 1), L * matrix.getScaleFactorY(y - 1));
+                    if (p.distanceToParticle(tmpParticle) <= Rc) {
+                        result.get(p).add(otherParticle);
+                        result.get(otherParticle).add(p);
+                    }
                 }
             }
         }
@@ -88,9 +101,9 @@ public class CellIndexMethod {
         SquareMatrix matrix;
 
         if(periodicBorder) {
-            matrix = new SquareMatrix(M);
-        } else {
             matrix = new PeriodicSquareMatrix(M);
+        } else {
+            matrix = new SquareMatrix(M);
         }
 
         double cellSize = L/M;
