@@ -97,11 +97,13 @@ public class Start {
 		}        
         
 		System.out.printf("VALORES N:%d L:%.2f M:%d Rc:%.2f\n", N,L,M,Rc);
-        System.out.printf("VALOR DE DENSIDAD: %f\n", ((double)N/Math.pow(L,2)));
+        System.out.printf("VALOR DE DENSIDAD: %.3f\n", ((double)N/Math.pow(L,2)));
 		System.out.printf("DELTA TIEMPO: %.2f\n",DELTA_TIME);
 		System.out.printf("ITERACIONES: %d\n", iterations);
-		
+		long start = System.currentTimeMillis();
+
         while(times < iterations) {    	
+        	System.out.println("Va: " + SelfDrivenParticles.simulationNormalizedVelocity(agents));
             SelfDrivenParticles.move(agents, DELTA_TIME);
             map = SelfDrivenParticles.neighbours(agents, L, M, Rc, true);
         	SelfDrivenParticles.updateAngle(map, ETA);   
@@ -120,6 +122,9 @@ public class Start {
         	
         }
         writer.close();
+        
+        System.out.println();
+        System.out.println("TIEMPO TOTAL: " + ((System.currentTimeMillis() - start) / 1000) + " segundos");
         System.out.println("PROCESO FINALIZADO.");
     }
 	

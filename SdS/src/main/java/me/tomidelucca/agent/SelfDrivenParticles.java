@@ -10,13 +10,18 @@ import me.tomidelucca.models.Particle;
 
 public class SelfDrivenParticles extends CellIndexMethod {
 	
+	/*
+	 * Mueve los agentes un tiempo delta_t
+	 * */
     public static void move(Particle[] particleArray, double delta_t) {
 	    for(int i = 0; i < particleArray.length; i++) {
 	    	Movement.doMove((Agent) particleArray[i]);
 	    }
     }
 
-    //TODO chequear que estos calculos sean correctos.
+	/*
+	 * Recalcula los angulos de cada uno de los agentes
+	 * */
 	public static void updateAngle(Map<Particle, Set<Particle>> map, double n) {
 		for(Entry<Particle,Set<Particle>> entry : map.entrySet()) {
 		    Particle key = entry.getKey();
@@ -46,6 +51,9 @@ public class SelfDrivenParticles extends CellIndexMethod {
 		}
 	}
 
+	/*
+	 * Actualiza la posicion de los agentes en caso de que se encuentren fuera del cuadrado LxL
+	 * */
 	public static void updatePosition(Map<Particle, Set<Particle>> map, double L) {
 		Set<Particle> setParticle = map.keySet();
 		
@@ -62,5 +70,22 @@ public class SelfDrivenParticles extends CellIndexMethod {
 			if(p.getPosition().getY() > L)
 				p.getPosition().setY( L - p.getPosition().getY());
 		}
+	}
+
+	/*
+	 * Calcula el valor de Va (absolute value of the normalized velocity
+	 * */
+	public static double simulationNormalizedVelocity(Particle[] particleArray) {
+		double particleVelocity = ((Agent)particleArray[0]).getSpeed();
+		double xVelocityAvg = 0;
+		double yVelocityAvg = 0;
+		
+		for (int i = 0; i < particleArray.length; i++) {
+			xVelocityAvg += Math.cos(((Agent)particleArray[i]).getAngle())*((Agent)particleArray[i]).getSpeed();
+			yVelocityAvg += Math.sin(((Agent)particleArray[i]).getAngle())*((Agent)particleArray[i]).getSpeed();
+		}
+
+		double absVelocity = Math.sqrt(Math.pow(xVelocityAvg, 2) + Math.pow(yVelocityAvg, 2));
+		return absVelocity / (particleArray.length * particleVelocity);
 	}
 }
