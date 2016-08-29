@@ -32,4 +32,11 @@ public class InputGenerator {
         writer.close();
     }
 
+    public static void main(String[] args){
+    	generateRandomInput(40, 7, 1, "input/40_7.xyz");
+    	generateRandomInput(100, 7, 1, "input/100_7.xyz");
+    	generateRandomInput(400, 7, 1, "input/400_7.xyz");
+    	generateRandomInput(4000, 7, 1, "input/4000_7.xyz");
+    	generateRandomInput(10000, 7, 1, "input/10000_7.xyz");
+    }
 }
